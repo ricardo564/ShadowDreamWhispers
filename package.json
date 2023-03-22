@@ -26,6 +26,7 @@
     "@nuxt/devtools": "^0.2.5",
     "@nuxt/image-edge": "1.0.0-27968280.9739e4d",
     "@nuxtjs/google-fonts": "3.0.0-1",
+    "@nuxtjs/tailwindcss": "^6.6.4",
     "@rushstack/eslint-patch": "^1.2.0",
     "@types/nprogress": "^0.2.0",
     "@typescript-eslint/eslint-plugin": "^5.56.0",
@@ -39,8 +40,9 @@
     "eslint-plugin-vue": "^9.9.0",
     "netlify-cli": "^13.2.0",
     "nuxt": "^3.3.1",
-    "nuxt-windicss": "^2.6.0",
     "prettier": "^2.8.6",
+    "prettier-plugin-tailwindcss": "^0.2.5",
+    "tailwindcss": "^3.2.4",
     "vue-template-compiler": "^2.7.14"
   }
 }
