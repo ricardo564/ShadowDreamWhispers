@@ -20,7 +20,11 @@ export default defineNuxtConfig({
     '@nuxtjs/tailwindcss',
     '@vite-pwa/nuxt',
     '@nuxt/image-edge',
+    "nuxt-chatgpt",
   ],
+  chatgpt: {
+    apiKey: 'Your apiKey here goes here'
+  },
   pwa: {
     /* PWA options */
   },
