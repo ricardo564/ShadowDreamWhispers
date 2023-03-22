@@ -36,7 +36,7 @@
           </li>
         </ul>
       </div>
-      <ChartQuery />
+      <ChatQuery />
     </div>
   </div>
 </template>

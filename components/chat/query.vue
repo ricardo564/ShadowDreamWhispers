@@ -1,3 +1,14 @@
+<script setup lang="ts">
+const { send } = useChatgpt()
+
+const data = ref('')
+const message = ref('')
+
+async function sendMessage() {
+  const response = await send(message.value)
+  data.value = response
+}
+</script>
 <template>
   <div class="border-t flex border-gray-300 w-full p-3 items-center justify-between">
     <button>
@@ -15,7 +26,7 @@
       </svg>
     </button>
 
-    <input type="text" placeholder="Message"
+    <input v-model="message" type="text" placeholder="Message"
       class="rounded-full outline-none bg-gray-100 mx-3 w-full py-2 pl-4 block focus:text-gray-700" name="message"
       required />
     <button>
@@ -25,7 +36,7 @@
           d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" />
       </svg>
     </button>
-    <button type="submit">
+    <button type="submit" @click="sendMessage">
       <svg class="h-5 transform origin-center text-gray-500 w-5 rotate-90" xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 20 20" fill="currentColor">
         <path
