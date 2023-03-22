@@ -5,7 +5,9 @@ interface Item {
 
 class Database {
   private static readonly VERSION = 1;
-  private static dbs: { [name: string]: IDBDatabase | PromiseLike<IDBDatabase> } = {};
+  private static dbs: {
+    [name: string]: IDBDatabase | PromiseLike<IDBDatabase>;
+  } = {};
 
   private static async open(name: string): Promise<IDBDatabase> {
     return new Promise((resolve, reject) => {
@@ -35,7 +37,10 @@ class Database {
         console.log('onupgradeneeded');
         const db = (e.target as IDBRequest<IDBDatabase>).result;
         if (db) {
-          db.createObjectStore(name, { autoIncrement: true, keyPath: 'id' });
+          db.createObjectStore(name, {
+            autoIncrement: true,
+            keyPath: 'id',
+          });
         }
       };
     });
@@ -54,7 +59,8 @@ class Database {
       };
 
       store.openCursor().onsuccess = (e) => {
-        const cursor = (e.target as IDBRequest).result as IDBCursorWithValue;
+        const cursor = (e.target as IDBRequest)
+          .result as IDBCursorWithValue;
         if (cursor) {
           items.push(cursor.value);
           cursor.continue();

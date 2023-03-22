@@ -22,6 +22,7 @@
     "@types/node": "^18.15.5"
   },
   "devDependencies": {
+    "@antfu/eslint-config": "^0.37.0",
     "@netlify/plugin-lighthouse": "^4.0.7",
     "@nuxt/devtools": "^0.2.5",
     "@nuxt/image-edge": "1.0.0-27968280.9739e4d",

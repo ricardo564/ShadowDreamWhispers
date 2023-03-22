@@ -1,0 +1,142 @@
+{
+  "extends": "@antfu",
+  "rules": {
+    "vue/max-attributes-per-line": ["error", {
+      "singleline": {
+        "max": 1
+      },
+      "multiline": {
+        "max": 1
+      }
+    }],
+    "vue/component-tags-order": [
+      "error",
+      {
+        "order": [
+          [
+            "script",
+            "template"
+          ],
+          "style"
+        ]
+      }
+    ],
+    "vue/order-in-components": [
+      "error",
+      {
+        "order": [
+          "el",
+          "name",
+          "key",
+          "parent",
+          "functional",
+          "layout",
+          [
+            "delimiters",
+            "comments"
+          ],
+          [
+            "directives",
+            "filters"
+          ],
+          "extends",
+          "mixins",
+          [
+            "provide",
+            "inject"
+          ],
+          "ROUTER_GUARDS",
+          "components",
+          "middleware",
+          "validate",
+          "scrollToTop",
+          "transition",
+          "loading",
+          "inheritAttrs",
+          "model",
+          "emits",
+          "LIFECYCLE_HOOKS",
+          [
+            "props",
+            "propsData"
+          ],
+          "setup",
+          "asyncData",
+          "data",
+          "fetch",
+          "head",
+          "computed",
+          "watch",
+          "watchQuery",
+          "methods",
+          [
+            "template",
+            "render"
+          ],
+          "renderError"
+        ]
+      }
+    ],
+    "vue/attributes-order": [
+      "error",
+      {
+        "order": [
+          "DEFINITION",
+          "LIST_RENDERING",
+          "CONDITIONALS",
+          "TWO_WAY_BINDING",
+          "CONTENT",
+          "RENDER_MODIFIERS",
+          [
+            "GLOBAL",
+            "UNIQUE",
+            "SLOT",
+            "OTHER_ATTR"
+          ],
+          "OTHER_DIRECTIVES",
+          "EVENTS"
+        ],
+        "alphabetical": false
+      }
+    ],
+    "vue/no-reserved-component-names": 0,
+    "vue/no-mutating-props": 1,
+    "curly": 0,
+    "no-console": "warn",
+    "prettier/prettier": [
+      "error",
+      {
+        "semi": true,
+        "quoteProps": "consistent",
+        "jsxSingleQuote": true,
+        "trailingComma": "all",
+        "singleQuote": true,
+        "printWidth": 75,
+        "tabWidth": 2,
+        "pluginSearchDirs": false,
+        "bracketSameLine": false,
+        "bracketSpacing": true,
+        "arrowParens": "always",
+        "singleAttributePerLine": true,
+        "jsxBracketSameLine": false,
+        "endOfLine": "auto",
+        "htmlWhitespaceSensitivity": "strict",
+        "proseWrap": "never",
+        "useTabs": false,
+        "plugins": ["prettier-plugin-tailwindcss"],
+        "parser": "typescript",
+        "embeddedLanguageFormatting": "auto",
+        "vueIndentScriptAndStyle": false,
+        "overrides": [
+          {
+            "files": "*.vue",
+            "options": {
+              "parser": "vue",
+              "trailingComma": "none",
+            },
+          },
+        ],
+      },
+    ],
+  }
+}
