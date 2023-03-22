@@ -1,4 +1,7 @@
 <script setup lang="ts">
+import Database from '@/services/indexedDb';
+
+const chatId = "12546dddww@#!@"
 const { send } = useChatgpt()
 
 const data = ref('')
@@ -7,35 +10,21 @@ const message = ref('')
 async function sendMessage() {
   const response = await send(message.value)
   data.value = response
+
+  const item = {
+    id: Date.now().toString(),
+    message: response
+  }
+
+  await Database.saveItem(chatId, item)
 }
+
 </script>
 <template>
   <div class="border-t flex border-gray-300 w-full p-3 items-center justify-between">
-    <button>
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 text-gray-500 w-6" fill="none" viewBox="0 0 24 24"
-        stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-          d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-      </svg>
-    </button>
-    <button>
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 text-gray-500 w-5" fill="none" viewBox="0 0 24 24"
-        stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-          d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13" />
-      </svg>
-    </button>
-
     <input v-model="message" type="text" placeholder="Message"
       class="rounded-full outline-none bg-gray-100 mx-3 w-full py-2 pl-4 block focus:text-gray-700" name="message"
       required />
-    <button>
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 text-gray-500 w-5" fill="none" viewBox="0 0 24 24"
-        stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-          d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" />
-      </svg>
-    </button>
     <button type="submit" @click="sendMessage">
       <svg class="h-5 transform origin-center text-gray-500 w-5 rotate-90" xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 20 20" fill="currentColor">
