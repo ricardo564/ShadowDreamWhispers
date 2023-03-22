@@ -1,0 +1,46 @@
+{
+  "private": true,
+  "author": {
+    "name": "Camillus Bloodfallen",
+    "url": "https://www.linkedin.com/in/ricardo-camilo-492b95b3/"
+  },
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare",
+    "start": "node .output/server/index.mjs",
+    "lint": "eslint ./**/*.{ts,js,vue,html} --fix",
+    "style:fix": "prettier --write  ./**/*.{js,ts,html,vue}",
+    "style:vue": "prettier --check ./**/*.{js,ts,html,vue}",
+    "style:js-ts": "prettier --check '{plugins,services,store,utils}/**/*.{j,t}s?(x)'",
+    "fix": "pnpm run lint && pnpm run style:fix"
+  },
+  "dependencies": {
+    "@nuxt/typescript-runtime": "^2.1.0",
+    "@types/node": "^18.15.5"
+  },
+  "devDependencies": {
+    "@netlify/plugin-lighthouse": "^4.0.7",
+    "@nuxt/devtools": "^0.2.5",
+    "@nuxt/image-edge": "1.0.0-27968280.9739e4d",
+    "@nuxtjs/google-fonts": "3.0.0-1",
+    "@rushstack/eslint-patch": "^1.2.0",
+    "@types/nprogress": "^0.2.0",
+    "@typescript-eslint/eslint-plugin": "^5.56.0",
+    "@typescript-eslint/parser": "^5.56.0",
+    "@vite-pwa/nuxt": "^0.0.7",
+    "@vue/eslint-config-prettier": "^7.1.0",
+    "eslint": "^8.36.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-nuxt": "^3.2.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-vue": "^9.9.0",
+    "netlify-cli": "^13.2.0",
+    "nuxt": "^3.3.1",
+    "nuxt-windicss": "^2.6.0",
+    "prettier": "^2.8.6",
+    "vue-template-compiler": "^2.7.14"
+  }
+}

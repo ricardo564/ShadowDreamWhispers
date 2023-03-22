@@ -1,0 +1,15 @@
+node_modules
+nuxt
+nuxi dev
+dist
+dist-ssr
+coverage
+.nuxt
+.nitro
+.cache
+.output
+.env
+.DS_Store
+.vite
+*.local
+*.log*
