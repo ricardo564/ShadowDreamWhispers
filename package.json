@@ -12,9 +12,6 @@
     "postinstall": "nuxt prepare",
     "start": "node .output/server/index.mjs",
     "lint": "eslint ./**/*.{ts,js,vue,html} --fix",
-    "style:fix": "prettier --write  ./**/*.{js,ts,html,vue}",
-    "style:vue": "prettier --check ./**/*.{js,ts,html,vue}",
-    "style:js-ts": "prettier --check '{plugins,services,store,utils}/**/*.{j,t}s?(x)'",
     "fix": "pnpm run lint && pnpm run style:fix"
   },
   "dependencies": {
@@ -33,17 +30,12 @@
     "@typescript-eslint/eslint-plugin": "^5.56.0",
     "@typescript-eslint/parser": "^5.56.0",
     "@vite-pwa/nuxt": "^0.0.7",
-    "@vue/eslint-config-prettier": "^7.1.0",
     "eslint": "^8.36.0",
-    "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-nuxt": "^3.2.0",
-    "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-vue": "^9.9.0",
     "netlify-cli": "^13.2.0",
     "nuxt": "^3.3.1",
     "nuxt-chatgpt": "^0.1.9",
-    "prettier": "^2.8.6",
-    "prettier-plugin-tailwindcss": "^0.2.5",
     "tailwindcss": "^3.2.4",
     "vue-template-compiler": "^2.7.14"
   }

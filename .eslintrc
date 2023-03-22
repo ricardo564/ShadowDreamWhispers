@@ -103,40 +103,5 @@
     "vue/no-mutating-props": 1,
     "curly": 0,
     "no-console": "warn",
-    "prettier/prettier": [
-      "error",
-      {
-        "semi": true,
-        "quoteProps": "consistent",
-        "jsxSingleQuote": true,
-        "trailingComma": "all",
-        "singleQuote": true,
-        "printWidth": 75,
-        "tabWidth": 2,
-        "pluginSearchDirs": false,
-        "bracketSameLine": false,
-        "bracketSpacing": true,
-        "arrowParens": "always",
-        "singleAttributePerLine": true,
-        "jsxBracketSameLine": false,
-        "endOfLine": "auto",
-        "htmlWhitespaceSensitivity": "strict",
-        "proseWrap": "never",
-        "useTabs": false,
-        "plugins": ["prettier-plugin-tailwindcss"],
-        "parser": "typescript",
-        "embeddedLanguageFormatting": "auto",
-        "vueIndentScriptAndStyle": false,
-        "overrides": [
-          {
-            "files": "*.vue",
-            "options": {
-              "parser": "vue",
-              "trailingComma": "none",
-            },
-          },
-        ],
-      },
-    ],
   }
 }

@@ -2,12 +2,15 @@
   <div class="flex h-auto w-full">
     <div class="w-full">
       <div class="border-b flex border-gray-300 p-3 relative items-center">
-        <img class="rounded-full object-cover h-10 w-10"
-          src="https://cdn.pixabay.com/photo/2018/01/15/07/51/woman-3083383__340.jpg" alt="username" />
+        <img
+          class="rounded-full object-cover h-10 w-10"
+          src="https://cdn.pixabay.com/photo/2018/01/15/07/51/woman-3083383__340.jpg"
+          alt="username"
+        >
         <span class="font-bold ml-2 text-gray-600 block">
           Emma
         </span>
-        <span class="rounded-full bg-green-600 h-3 top-3 left-10 w-3 absolute"></span>
+        <span class="rounded-full bg-green-600 h-3 top-3 left-10 w-3 absolute" />
       </div>
       <div class="h-[40rem] w-full p-6 relative overflow-y-auto">
         <ul class="space-y-2">

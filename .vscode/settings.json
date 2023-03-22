@@ -4,5 +4,8 @@
     "nuxt",
     "nuxtjs",
     "windi"
-  ]
+  ],
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
 }
