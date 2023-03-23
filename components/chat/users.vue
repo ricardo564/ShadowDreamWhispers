@@ -56,14 +56,14 @@ onMounted(() => {
       </div>
     </div>
     <div
-      class="border rounded-full border-gray-300 text-sm py-2 mx-5 transition ease-in-out duration-150 items-center hover:bg-gray-100 focus:outline-none text-center"
+      class="grid items-center text-center"
     >
-      <button
-        class="flex justify-center items-center text-center w-full h-auto"
+      <Button
+        class="border rounded-full border-gray-300 text-sm py-2 mx-5 transition ease-in-out duration-150 items-center hover:bg-gray-100 focus:outline-none text-center"
+        label="Create a new chat"
+        icon="bx bxs-message-rounded-add w-8 h-8 text-3xl bg-red-500 text-black rounded-full"
         @click="handleWithCreateANewDatabase(handleCreateDatabaseId())"
-      >
-        Create a new chat
-      </button>
+      />
     </div>
     <h2 class="my-2 text-lg mb-2 ml-2 text-gray-600 w-full text-center">
       Chats
