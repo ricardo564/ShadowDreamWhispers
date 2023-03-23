@@ -9,7 +9,9 @@ const handleWithGetListOfDatabase = () => {
   databaseStore.getAllDatabaseInIndexedDB()
 }
 
-const handleCreateRandonId = () => {
+const databaseList = databaseStore.databaseList
+
+const handleCreateDatabaseId = () => {
   return uuidv4()
 }
 
@@ -58,7 +60,7 @@ onMounted(() => {
     >
       <button
         class="flex justify-center items-center text-center w-full h-auto"
-        @click="handleWithCreateANewDatabase(handleCreateRandonId())"
+        @click="handleWithCreateANewDatabase(handleCreateDatabaseId())"
       >
         Create a new chat
       </button>

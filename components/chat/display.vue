@@ -22,24 +22,30 @@ const handleWithChatStyle = (id: string) => {
 </script>
 
 <template>
-  <div class="grid min-h-full h-screen w-full relative">
-    <div class="min-h-full w-full h-full ">
-      <div class="border-b flex border-gray-300 p-3 relative items-center">
-        <img class="rounded-full object-cover h-10 w-10"
-             src="https://cdn.pixabay.com/photo/2018/01/15/07/51/woman-3083383__340.jpg"
-             alt="username">
+  <div class="flex flex-col h-auto max-h-[88vh] w-full relative">
+    <div class="min-h-full w-full h-full">
+      <div class="border-b flex border-gray-300 p-3 relative items-center h-18">
+        <img
+          class="rounded-full object-cover h-10 w-10"
+          src="https://cdn.pixabay.com/photo/2018/01/15/07/51/woman-3083383__340.jpg"
+          alt="username"
+        >
         <span class="font-bold ml-2 text-gray-600 block">
           {{ databaseId }}
         </span>
-        <span class="rounded-full bg-green-600 h-3 top-3 left-10 w-3 absolute" />
+        <span class="rounded-full h-3 top-3 left-10 w-3 absolute" />
       </div>
-      <div class="h-[40rem] w-full h-auto p-6 relative overflow-y-auto">
-        <ul class="space-y-8 flex flex-col">
-          <li v-for="response in allResponses"
-              :key="response.id"
-              class="flex"
-              :class="handleWithChatStyle(response.id)">
-            <div class="rounded max-w-xl shadow py-2 px-4 text-gray-700 relative">
+      <div
+        class="flex flex-col h-full w-full overflow-hidden max-h-screen overflow-y-auto"
+      >
+        <ul class="grid gap-4 overflow-x-hidden overflow-y-auto w-full h-auto p-6">
+          <li
+            v-for="response in allResponses"
+            :key="response.id"
+            class="flex h-auto"
+            :class="handleWithChatStyle(response.id)"
+          >
+            <div class="rounded max-w-xl shadow shadow-gray-400 py-2 px-4 text-gray-700 relative">
               <p>
                 {{ response?.id }}
               </p>
@@ -48,11 +54,12 @@ const handleWithChatStyle = (id: string) => {
           </li>
         </ul>
       </div>
-    </div>
-    <div
-      class="border-gray-300 flex items-center justify-between p-3 absolute bottom-0 w-full"
-    >
-      <ChatQuery />
+
+      <div
+        class="border-gray-300 flex items-center justify-between p-3 bottom-0 mt-auto w-full h-18"
+      >
+        <ChatQuery />
+      </div>
     </div>
   </div>
 </template>

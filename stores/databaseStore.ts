@@ -9,9 +9,9 @@ export interface Item {
 export const useDatabaseStore = defineStore("database", {
 	state: () => ({
 		allResponses: [] as Item[],
-		databaseId: "0",
+		databaseId: "chat-1",
 		databaseList: [],
-		userId: "CamillusBloodfallen",
+		userId: "userName",
 	}),
 	getters: {
 		getDatabaseId(): string {
