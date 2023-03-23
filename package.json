@@ -5,18 +5,22 @@
     "url": "https://www.linkedin.com/in/ricardo-camilo-492b95b3/"
   },
   "scripts": {
-    "build": "nuxt build",
-    "dev": "nuxt dev",
-    "generate": "nuxt generate",
-    "preview": "nuxt preview",
-    "postinstall": "nuxt prepare",
+    "build": "nuxi build",
+    "dev": "nuxi dev",
+    "generate": "nuxi generate",
+    "preview": "nuxi preview",
+    "postinstall": "nuxi prepare",
     "start": "node .output/server/index.mjs",
-    "lint": "eslint ./**/*.{ts,js,vue,html} --fix",
+    "lint": "eslint . --fix",
     "fix": "pnpm run lint && pnpm run style:fix"
   },
   "dependencies": {
     "@nuxt/typescript-runtime": "^2.1.0",
-    "@types/node": "^18.15.5"
+    "@pinia/nuxt": "^0.4.7",
+    "@types/node": "^18.15.5",
+    "@vue/composition-api": "^1.7.1",
+    "pinia": "^2.0.33",
+    "uuid": "^9.0.0"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.37.0",
