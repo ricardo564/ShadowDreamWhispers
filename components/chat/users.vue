@@ -30,7 +30,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="border-r border-gray-300 min-w-[20rem] h-screen w-full md:w-1/3">
+  <div class="border-r border-gray-300 min-w-[20rem] h-full w-full md:w-1/3 relative">
     <div class="my-3 mx-3">
       <div class="text-gray-600 relative">
         <span class="flex pl-2 inset-y-0 left-0 absolute items-center">
@@ -65,10 +65,10 @@ onMounted(() => {
         Create a new chat
       </button>
     </div>
-    <ul class="h-auto w-full overflow-hidden max-h-screen overflow-y-auto">
-      <h2 class="my-2 text-lg mb-2 ml-2 text-gray-600">
-        Chats
-      </h2>
+    <h2 class="my-2 text-lg mb-2 ml-2 text-gray-600 w-full text-center">
+      Chats
+    </h2>
+    <ul class="h-full w-full overflow-hidden overflow-y-auto">
       <li
         v-for="(item, index) in databaseStore.databaseList"
         :key="index"

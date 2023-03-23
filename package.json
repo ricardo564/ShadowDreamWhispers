@@ -20,7 +20,10 @@
     "@types/node": "^18.15.5",
     "@vue/composition-api": "^1.7.1",
     "pinia": "^2.0.33",
-    "uuid": "^9.0.0"
+    "uuid": "^9.0.0",
+    "nprogress": "^0.2.0",
+    "boxicons": "^2.1.4",
+    "typescript": "^4.9.5"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.37.0",

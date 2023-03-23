@@ -20,6 +20,10 @@ export default defineNuxtConfig({
     'nuxt-chatgpt',
     '@pinia/nuxt',
   ],
+  devtools: {
+    enabled: true,
+    vscode: {},
+  },
   chatgpt: {
     apiKey: 'Your apiKey here goes here',
   },
