@@ -18,6 +18,7 @@ export default defineNuxtConfig({
     '@vite-pwa/nuxt',
     '@nuxt/image-edge',
     'nuxt-chatgpt',
+    '@pinia/nuxt',
   ],
   chatgpt: {
     apiKey: 'Your apiKey here goes here',
@@ -34,4 +35,4 @@ export default defineNuxtConfig({
     },
     display: 'swap',
   },
-});
+})
