@@ -1,103 +1,124 @@
 interface Item {
-  id: number;
-  [key: string]: any; // permite adicionar outras propriedades dinamicamente
+  id: number
+  [key: string]: any
 }
 
 class Database {
-  private static readonly VERSION = 1;
+  private static readonly VERSION = 1
   private static dbs: {
-    [name: string]: IDBDatabase | PromiseLike<IDBDatabase>;
-  } = {};
+    [name: string]: IDBDatabase | PromiseLike<IDBDatabase>
+  } = {}
+
+  static deleteItem: any
 
   private static async open(name: string): Promise<IDBDatabase> {
-    return new Promise((resolve, reject) => {
+    return new Promise<IDBDatabase>((resolve, reject) => {
       if (Database.dbs[name]) {
-        return resolve(Database.dbs[name]);
+        resolve(Database.dbs[name])
+        return
       }
 
-      const request = window.indexedDB.open(name, Database.VERSION);
+      const request = window.indexedDB.open(name, Database.VERSION)
 
-      request.onerror = (e) => {
-        console.error('Error opening db', e);
-        reject('Error');
-      };
+      request.onerror = () => {
+        reject(new Error('Error opening db'))
+      }
 
       request.onsuccess = (e) => {
-        const request = e.target as IDBRequest<IDBDatabase>;
-        const db = request.result;
+        const request = e.target as IDBRequest<IDBDatabase>
+        const db = request.result
         if (db) {
-          Database.dbs[name] = db;
-          resolve(db);
-        } else {
-          reject('Database is null');
+          Database.dbs[name] = db
+          resolve(db)
         }
-      };
+        else {
+          reject(new Error('Database is null'))
+        }
+      }
 
-      request.onupgradeneeded = (e) => {
-        console.log('onupgradeneeded');
-        const db = (e.target as IDBRequest<IDBDatabase>).result;
+      request.onupgradeneeded = () => {
+        console.log('onupgradeneeded')
+        const db = request.result
         if (db) {
           db.createObjectStore(name, {
             autoIncrement: true,
             keyPath: 'id',
-          });
+          })
         }
-      };
-    });
+      }
+    })
   }
 
   public static async getItems(dbName: string): Promise<Item[]> {
-    const db = await Database.open(dbName);
+    const db = await Database.open(dbName)
 
     return new Promise((resolve) => {
-      const trans = db.transaction([dbName], 'readonly');
-      const store = trans.objectStore(dbName);
-      const items: Item[] = [];
+      const trans = db.transaction([dbName], 'readonly')
+      const store = trans.objectStore(dbName)
+      const items: Item[] = []
 
       trans.oncomplete = () => {
-        resolve(items);
-      };
+        resolve(items)
+      }
 
       store.openCursor().onsuccess = (e) => {
         const cursor = (e.target as IDBRequest)
-          .result as IDBCursorWithValue;
+          .result as IDBCursorWithValue
         if (cursor) {
-          items.push(cursor.value);
-          cursor.continue();
+          items.push(cursor.value)
+          cursor.continue()
         }
-      };
-    });
+      }
+    })
   }
 
   public static async saveItem(dbName: string, item: Item): Promise<void> {
-    const db = await Database.open(dbName);
+    const db = await Database.open(dbName)
 
     return new Promise((resolve) => {
-      const trans = db.transaction([dbName], 'readwrite');
-      const store = trans.objectStore(dbName);
+      const trans = db.transaction([dbName], 'readwrite')
+      const store = trans.objectStore(dbName)
 
       trans.oncomplete = () => {
-        resolve();
-      };
+        resolve()
+      }
 
-      store.put(item);
-    });
+      store.put(item)
+    })
   }
 
   public async deleteItem(dbName: string, id: number): Promise<void> {
-    const db = await Database.open(dbName);
+    const db = await Database.open(dbName)
 
     return new Promise((resolve) => {
-      const trans = db.transaction([dbName], 'readwrite');
-      const store = trans.objectStore(dbName);
+      const trans = db.transaction([dbName], 'readwrite')
+      const store = trans.objectStore(dbName)
 
       trans.oncomplete = () => {
-        resolve();
-      };
+        resolve()
+      }
 
-      store.delete(id);
+      store.delete(id)
+    })
+  }
+
+  public static async getAllDatabasesList(): Promise<string[]> {
+    return new Promise((resolve) => {
+      window.indexedDB.databases().then((databases: IDBDatabaseInfo[]) => {
+        const databaseList = databases.map((database) => database.name);
+        resolve(databaseList);
+      });
     });
+  }
+
+  public static async createDatabase(name: string): Promise<string> {
+    return new Promise((resolve) => {
+      const request = window.indexedDB.open(name, Database.VERSION)
+      request.onsuccess = () => {
+        resolve(name)
+      }
+    })
   }
 }
 
-export default Database;
+export default Database
