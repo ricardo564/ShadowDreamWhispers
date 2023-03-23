@@ -9,6 +9,10 @@
     "sourceMap": true,
     "strict": true,
     "noEmit": true,
+    "moduleResolution": "node",
+    "importHelpers": true,
+    "jsx": "preserve",
+    "resolveJsonModule": true,
     "baseUrl": ".",
     "paths": {
       "~/*": [
@@ -18,6 +22,14 @@
         "./*"
       ]
     },
+    "allowSyntheticDefaultImports": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "include": [
+    "src",
+    "locales",
+    "tests"
+    ],
     "types": [
       "nuxt-windicss",
       "@nuxt/types",

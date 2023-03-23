@@ -103,5 +103,7 @@
     "vue/no-mutating-props": 1,
     "curly": 0,
     "no-console": "warn",
+    "indent": ["error", 2],
+    "@typescript-eslint/indent": "error"
   }
 }
