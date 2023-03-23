@@ -1,10 +1,12 @@
 <script setup lang="ts">
 import { v4 as uuidv4 } from 'uuid'
 import { useDatabaseStore } from '~/stores/databaseStore'
+import { startNprogress } from '~/utils/nProgress'
 
 interface Item {
   id: string
   message: string
+  created_at: string
 }
 
 const { send } = useChatgpt()
@@ -21,11 +23,12 @@ const databaseId = databaseStore.getDatabaseId
 const userId = databaseStore.getUserId
 
 const saveQueryOnDatabase = async () => {
+  startNprogress()
   loading = true
-
   const query: Item = {
     id: userId,
     message: message.value,
+    created_at: new Date().toISOString(),
   }
 
   await databaseStore.saveQuery(databaseId, query)

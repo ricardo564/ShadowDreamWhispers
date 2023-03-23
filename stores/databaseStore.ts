@@ -1,9 +1,10 @@
 import { acceptHMRUpdate, defineStore } from 'pinia'
 import Database from '~/services/IndexedDb'
+import { startNprogress } from '~/utils/nProgress'
 
 export interface Item {
-	id: string
-	[key: string]: any
+  id: string
+  [key: string]: any
 }
 
 export const useDatabaseStore = defineStore('database', {
@@ -29,15 +30,18 @@ export const useDatabaseStore = defineStore('database', {
   },
   actions: {
     createNewDatabase(name: string): void {
+      startNprogress()
       Database.createDatabase(name).then((result: any) => {
         this.databaseList.push(result)
       })
     },
     setDatabaseId(id: string): void {
       this.databaseId = id
+      startNprogress()
     },
     async getAllData(dbId: string): Promise<void> {
       try {
+        startNprogress()
         const items = await Database.getItems(dbId)
         this.allResponses = items
       }
@@ -52,6 +56,7 @@ export const useDatabaseStore = defineStore('database', {
     },
     async saveResponse(chatId: string, response: any): Promise<void> {
       try {
+        startNprogress()
         await Database.saveItem(chatId, response)
         this.allResponses.push(response)
       }
@@ -61,6 +66,7 @@ export const useDatabaseStore = defineStore('database', {
     },
     async saveQuery(userId: string, query: any): Promise<void> {
       try {
+        startNprogress()
         await Database.saveItem(userId, query)
         this.allResponses.push(query)
       }
@@ -70,6 +76,7 @@ export const useDatabaseStore = defineStore('database', {
     },
     async deleteResponse(chatId: string, id: string): Promise<void> {
       try {
+        startNprogress()
         await Database.deleteItem(chatId, id)
         const index = this.allResponses.findIndex(item => item.id === id)
         if (index !== -1) {

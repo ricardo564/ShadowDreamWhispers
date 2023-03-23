@@ -1,3 +1,5 @@
+import { startNprogress } from '~/utils/nProgress'
+
 interface Item {
   id: number
   [key: string]: any
@@ -13,8 +15,11 @@ class Database {
 
   private static async open(name: string): Promise<IDBDatabase> {
     return new Promise<IDBDatabase>((resolve, reject) => {
+      startNprogress()
+
       if (Database.dbs[name]) {
         resolve(Database.dbs[name])
+
         return
       }
 
@@ -51,6 +56,7 @@ class Database {
 
   public static async getItems(dbName: string): Promise<Item[]> {
     const db = await Database.open(dbName)
+    startNprogress()
 
     return new Promise((resolve) => {
       const trans = db.transaction([dbName], 'readonly')
@@ -72,6 +78,7 @@ class Database {
   }
 
   public static async saveItem(dbName: string, item: Item): Promise<void> {
+    startNprogress()
     const db = await Database.open(dbName)
 
     return new Promise((resolve) => {
@@ -87,6 +94,7 @@ class Database {
   }
 
   public async deleteItem(dbName: string, id: number): Promise<void> {
+    startNprogress()
     const db = await Database.open(dbName)
 
     return new Promise((resolve) => {
@@ -102,6 +110,8 @@ class Database {
   }
 
   public static async getAllDatabasesList(): Promise<string[]> {
+    startNprogress()
+
     return new Promise((resolve) => {
       window.indexedDB.databases().then((databases: IDBDatabaseInfo[]) => {
         const databaseList = databases.map(database => database.name)
@@ -111,6 +121,8 @@ class Database {
   }
 
   public static async createDatabase(name: string): Promise<string> {
+    startNprogress()
+
     return new Promise((resolve) => {
       const request = window.indexedDB.open(name, Database.VERSION)
       request.onsuccess = () => {
