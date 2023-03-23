@@ -25,7 +25,7 @@ export default defineNuxtConfig({
     vscode: {},
   },
   chatgpt: {
-    apiKey: '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',
+    apiKey: 'Your apiKey here goes here',
   },
   pwa: {
     /* PWA options */
