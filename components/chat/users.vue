@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { onMounted } from 'vue'
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from 'uuid'
 import { useDatabaseStore } from '~/stores/databaseStore'
 
 const databaseStore = useDatabaseStore()
