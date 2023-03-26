@@ -2,6 +2,7 @@
 import { v4 as uuidv4 } from 'uuid'
 import { useDatabaseStore } from '~/stores/databaseStore'
 import { startNprogress } from '~/utils/nProgress'
+import axios from '~/plugins/axios'
 
 interface Item {
   id: string
@@ -11,7 +12,7 @@ interface Item {
 
 const { send } = useChatgpt()
 
-const handleCreateRandonId = () => {
+const handleCreateRandomId = () => {
   return uuidv4()
 }
 
@@ -22,6 +23,8 @@ let loading = false
 const databaseId = databaseStore.getDatabaseId
 const userId = databaseStore.getUserId
 
+const { $axios } = axios
+
 const saveQueryOnDatabase = async () => {
   startNprogress()
   loading = true
@@ -31,36 +34,40 @@ const saveQueryOnDatabase = async () => {
     created_at: new Date().toISOString(),
   }
 
-  await databaseStore.saveQuery(databaseId, query)
-    .then(() => {
-      message.value = ''
-      loading = false
-    })
-    .catch((err: any) => {
-      loading = false
-      console.log(err)
-    })
+  try {
+    await $axios.post(`/databases/${databaseId}/queries`, query)
+    message.value = ''
+  }
+  catch (err) {
+    console.log(err)
+  }
+  finally {
+    loading = false
+  }
 }
 
 const sendMessage = async () => {
   loading = true
 
-  await send(message.value)
-    .then((res: any) => {
-      const resWithId: Item = {
-        id: handleCreateRandonId(),
-        message: res,
-      }
-
-      saveQueryOnDatabase()
-
-      databaseStore.saveResponse(databaseId, resWithId)
-      loading = false
-    })
-    .catch((err: any) => {
-      loading = false
-      console.log(err)
-    })
+  try {
+    const res = await send(message.value)
+    const resWithId: Item = {
+      id: handleCreateRandomId(),
+      message: res,
+    }
+    saveQueryOnDatabase()
+    const response: Item = {
+      id: handleCreateRandomId(),
+      message: res,
+    }
+    databaseStore.saveResponse(databaseId, response)
+  }
+  catch (err) {
+    console.log(err)
+  }
+  finally {
+    loading = false
+  }
 }
 </script>
 
