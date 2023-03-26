@@ -108,7 +108,6 @@
     "no-tabs": "error",
     "no-trailing-spaces": "error",
     "no-multiple-empty-lines": ["error", { "max": 1 }],
-    "object-curly-newline": ["error", { "multiline": true, "consistent": true }],
-    "semi": [1, "always"]
+    "object-curly-newline": ["error", { "multiline": true, "consistent": true }]
   }
 }
