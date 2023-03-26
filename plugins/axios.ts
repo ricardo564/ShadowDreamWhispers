@@ -2,6 +2,11 @@ import { defineNuxtPlugin } from '@nuxtjs/composition-api'
 import type { AxiosInstance, AxiosRequestConfig } from 'axios'
 import axios from 'axios'
 
+interface InternalAxiosRequestConfig<T = any> extends AxiosRequestConfig {
+  retryCount?: number
+  expectedResponse?: T
+}
+
 const MAX_REQUESTS_COUNT = 5
 const INTERVAL_MS = 10
 const MAX_RETRY_COUNT = 3
@@ -9,7 +14,7 @@ const MAX_RETRY_COUNT = 3
 let pendingRequests = 0
 
 const requestInterceptor = (config: AxiosRequestConfig) =>
-  new Promise<AxiosRequestConfig<any>>((resolve, reject) => {
+  new Promise<AxiosRequestConfig>((resolve, reject) => {
     const interval = setInterval(() => {
       if (pendingRequests < MAX_REQUESTS_COUNT) {
         pendingRequests += 1
@@ -36,9 +41,10 @@ const createAxiosInstance = () => {
 
   return instance
 }
-const axiosInstance = createAxiosInstance()
 
-const errorInterceptor = (error: { response?: any; config?: any }) => {
+const axiosInstance: AxiosInstance = createAxiosInstance()
+
+const errorInterceptor = (error: { response?: any; config?: InternalAxiosRequestConfig<any> }) => {
   pendingRequests = Math.max(0, pendingRequests - 1)
   if (
     error.response
@@ -46,12 +52,12 @@ const errorInterceptor = (error: { response?: any; config?: any }) => {
     && error.response.data.error === 'ER_USER_LIMIT_REACHED'
   ) {
     const { config } = error
-    const retryCount = config.retryCount || 0
+    const retryCount = config?.retryCount || 0
     if (retryCount < MAX_RETRY_COUNT) {
       return new Promise((resolve) => {
         setTimeout(() => {
-          config.retryCount = retryCount + 1
-          resolve(axiosInstance(config))
+          config!.retryCount = retryCount + 1
+          resolve(axiosInstance(config!))
         }, (retryCount + 1) * 1000)
       })
     }
