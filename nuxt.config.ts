@@ -20,12 +20,15 @@ export default defineNuxtConfig({
     'nuxt-chatgpt',
     '@pinia/nuxt',
   ],
+  plugins: [
+    '~/plugins/axios.ts',
+  ],
   devtools: {
     enabled: true,
     vscode: {},
   },
   chatgpt: {
-    apiKey: 'Your apiKey here goes here',
+    apiKey: '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',
   },
   pwa: {
     /* PWA options */
