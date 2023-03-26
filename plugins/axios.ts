@@ -1,4 +1,3 @@
-import { defineNuxtPlugin } from '@nuxtjs/composition-api'
 import type { AxiosInstance, AxiosRequestConfig } from 'axios'
 import axios from 'axios'
 
@@ -29,21 +28,6 @@ const responseInterceptor = (response: any) => {
   return Promise.resolve(response)
 }
 
-const createAxiosInstance = () => {
-  const instance = axios.create({
-    baseURL: import.meta.env.VITE_API_URL || 'http://localhost:3000',
-    maxConcurrentRequests: 5,
-    keepAlive: true,
-  })
-
-  instance.interceptors.request.use(requestInterceptor)
-  instance.interceptors.response.use(responseInterceptor, errorInterceptor)
-
-  return instance
-}
-
-const axiosInstance: AxiosInstance = createAxiosInstance()
-
 const errorInterceptor = (error: { response?: any; config?: InternalAxiosRequestConfig<any> }) => {
   pendingRequests = Math.max(0, pendingRequests - 1)
   if (
@@ -64,6 +48,21 @@ const errorInterceptor = (error: { response?: any; config?: InternalAxiosRequest
   }
   return Promise.reject(error)
 }
+
+const createAxiosInstance = () => {
+  const instance = axios.create({
+    baseURL: import.meta.env.VITE_API_URL || 'http://localhost:3000',
+    maxConcurrentRequests: 5,
+    keepAlive: true,
+  })
+
+  instance.interceptors.request.use(requestInterceptor)
+  instance.interceptors.response.use(responseInterceptor, errorInterceptor)
+
+  return instance
+}
+
+const axiosInstance: AxiosInstance = createAxiosInstance()
 
 export default defineNuxtPlugin((nuxtApp: { provide: (arg0: string, arg1: AxiosInstance) => void }) => {
   nuxtApp.provide('axios', axiosInstance)
