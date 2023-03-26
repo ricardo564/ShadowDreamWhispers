@@ -102,8 +102,13 @@
     "vue/no-reserved-component-names": 0,
     "vue/no-mutating-props": 1,
     "curly": 0,
+    "@typescript-eslint/indent": "error",
     "no-console": "warn",
     "indent": ["error", 2],
-    "@typescript-eslint/indent": "error"
+    "no-tabs": "error",
+    "no-trailing-spaces": "error",
+    "no-multiple-empty-lines": ["error", { "max": 1 }],
+    "object-curly-newline": ["error", { "multiline": true, "consistent": true }],
+    "semi": [1, "always"]
   }
 }
