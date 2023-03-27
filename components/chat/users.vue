@@ -9,7 +9,7 @@ const handleWithGetListOfDatabase = () => {
   databaseStore.getAllDatabaseInIndexedDB()
 }
 
-const databaseList = databaseStore.databaseList
+const databaseList = await databaseStore.getDatabaseList
 
 const handleCreateDatabaseId = () => {
   return uuidv4()
@@ -68,9 +68,18 @@ onMounted(() => {
     <h2 class="my-2 text-lg mb-2 ml-2 text-gray-600 w-full text-center">
       Chats
     </h2>
-    <ul class="h-full w-full overflow-hidden overflow-y-auto">
+    <div
+      v-if="!databaseList"
+      class="h-auto flex items-center justify-center"
+    >
+      <span class="text-gray-400 mt-16">Loading...</span>
+    </div>
+    <ul
+      v-else
+      class="h-full w-full overflow-hidden overflow-y-auto"
+    >
       <li
-        v-for="(item, index) in databaseStore.databaseList"
+        v-for="(item, index) in databaseList"
         :key="index"
         @click="handleWithSetDatabaseId(item)"
       >
