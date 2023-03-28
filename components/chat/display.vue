@@ -1,18 +1,12 @@
 <script setup lang="ts">
 import { useDatabaseStore } from '~/stores/databaseStore'
 
-interface Item {
-  id: number
-  [key: string]: any
-}
-
 const databaseStore = useDatabaseStore()
 const databaseId = databaseStore.getDatabaseId
 const userId = databaseStore.getUserId
 await databaseStore.getAllData(databaseId)
-const allResponses = databaseStore.getAllResponses
 
-const handleWithChatStyle = (id: string) => {
+const handleWithChatStyle = (id: number) => {
   if (id === userId) {
     return 'flex justify-end'
   }
@@ -40,10 +34,10 @@ const handleWithChatStyle = (id: string) => {
       >
         <ul class="grid gap-4 overflow-x-hidden overflow-y-auto w-full h-auto p-6">
           <li
-            v-for="response in allResponses"
-            :key="response.id"
+            v-for="response in databaseStore.getAllResponses"
             class="flex h-auto"
-            :class="handleWithChatStyle(response.id)"
+            :key="response.id"
+            :class="handleWithChatStyle(response.created_at)"
           >
             <div class="rounded max-w-xl shadow shadow-gray-400 py-2 px-4 text-gray-700 relative">
               <p>
