@@ -10,7 +10,8 @@
     "Projeto",
     "tailwindcss",
     "uuidv",
-    "windi"
+    "windi",
+    "windicss"
   ],
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true
