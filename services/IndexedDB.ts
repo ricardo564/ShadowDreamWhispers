@@ -1,9 +1,5 @@
 import { startNprogress } from '~/utils/nProgress'
-
-interface Item {
-  id: number
-  [key: string]: any
-}
+import type { Item } from '~/types/message'
 
 class Database {
   private static readonly VERSION = 1
@@ -11,12 +7,10 @@ class Database {
     [name: string]: IDBDatabase | PromiseLike<IDBDatabase>
   } = {}
 
-  static deleteItem: any
-
   private static async open(name: string): Promise<IDBDatabase> {
     return new Promise<IDBDatabase>((resolve, reject) => {
       startNprogress()
-
+      console.log('name open: ', name)
       if (Database.dbs[name]) {
         resolve(Database.dbs[name])
 
@@ -42,13 +36,42 @@ class Database {
       }
 
       request.onupgradeneeded = () => {
-        console.log('onupgradeneeded')
         const db = request.result
         if (db) {
           db.createObjectStore(name, {
             autoIncrement: true,
             keyPath: 'id',
           })
+        }
+      }
+    })
+  }
+
+  public static async openDb(name: string): Promise<IDBDatabase> {
+    return new Promise<IDBDatabase>((resolve, reject) => {
+      startNprogress()
+
+      if (Database.dbs[name]) {
+        resolve(Database.dbs[name])
+
+        return
+      }
+
+      const request = window.indexedDB.open(name, Database.VERSION)
+
+      request.onerror = () => {
+        reject(new Error('Error opening db'))
+      }
+
+      request.onsuccess = (e) => {
+        const request = e.target as IDBRequest<IDBDatabase>
+        const db = request.result
+        if (db) {
+          Database.dbs[name] = db
+          resolve(db)
+        }
+        else {
+          reject(new Error('Database is null'))
         }
       }
     })
@@ -93,20 +116,14 @@ class Database {
     })
   }
 
-  public async deleteItem(dbName: string, id: number): Promise<void> {
-    startNprogress()
-    const db = await Database.open(dbName)
+  public static async deleteItem(dbName: string, id: number): Promise<void> {
+    const db = await Database.openDb(dbName)
+    const trans = db.transaction([dbName], 'readwrite')
+    const store = trans.objectStore(dbName)
 
-    return new Promise((resolve) => {
-      const trans = db.transaction([dbName], 'readwrite')
-      const store = trans.objectStore(dbName)
+    store.delete(id)
 
-      trans.oncomplete = () => {
-        resolve()
-      }
-
-      store.delete(id)
-    })
+    await trans.done
   }
 
   public static async getAllDatabasesList(): Promise<string[]> {
