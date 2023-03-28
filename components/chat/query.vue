@@ -1,73 +1,59 @@
 <script setup lang="ts">
-import { v4 as uuidv4 } from 'uuid'
+import { ref } from 'vue'
 import { useDatabaseStore } from '~/stores/databaseStore'
 import { startNprogress } from '~/utils/nProgress'
-import axios from '~/plugins/axios'
-
-interface Item {
-  id: string
-  message: string
-  created_at: string
-}
+import type { Item } from '~/types/message'
 
 const { send } = useChatgpt()
 
-const handleCreateRandomId = () => {
-  return uuidv4()
-}
-
 const databaseStore = useDatabaseStore()
 
+const handleCreateRandomId = () => {
+  return Number(databaseStore.getAllResponsesLength + 1)
+}
+
 const message = ref('')
-let loading = false
+const loading = ref(false)
 const databaseId = databaseStore.getDatabaseId
-const userId = databaseStore.getUserId
 
-const { $axios } = axios
+const sendMessage = async function () {
+  loading.value = true
 
-const saveQueryOnDatabase = async () => {
+  try {
+    const res = await send(message.value)
+
+    const resWithId: Item = {
+      id: handleCreateRandomId(),
+      message: res,
+      created_at: new Date().toISOString(),
+    }
+
+    databaseStore.saveResponse(databaseId, resWithId)
+  }
+  catch (err) {
+    console.log(err)
+  }
+  finally {
+    message.value = ''
+    loading.value = false
+  }
+}
+
+const saveQueryOnDatabase = async function () {
   startNprogress()
-  loading = true
+
+  loading.value = true
+
   const query: Item = {
-    id: userId,
+    id: handleCreateRandomId(),
     message: message.value,
     created_at: new Date().toISOString(),
   }
 
-  try {
-    await $axios.post(`/databases/${databaseId}/queries`, query)
-    message.value = ''
-  }
-  catch (err) {
-    console.log(err)
-  }
-  finally {
-    loading = false
-  }
-}
-
-const sendMessage = async () => {
-  loading = true
-
-  try {
-    const res = await send(message.value)
-    const resWithId: Item = {
-      id: handleCreateRandomId(),
-      message: res,
-    }
-    saveQueryOnDatabase()
-    const response: Item = {
-      id: handleCreateRandomId(),
-      message: res,
-    }
-    databaseStore.saveResponse(databaseId, response)
-  }
-  catch (err) {
-    console.log(err)
-  }
-  finally {
-    loading = false
-  }
+  databaseStore.saveQuery(query).then(() => {
+    sendMessage()
+    loading.value = false
+  })
 }
 </script>
 
@@ -79,14 +65,15 @@ const sendMessage = async () => {
       placeholder="Message"
       class="rounded-full outline-none bg-gray-100 mx-3 w-full py-2 pl-4 block focus:text-gray-700"
       name="message"
-      :disabled="loading"
       required
-      @keyup.enter="sendMessage"
+      autocomplete="off"
+      :disabled="loading"
+      @keyup.enter="saveQueryOnDatabase"
     >
     <button
       type="submit"
       :disabled="loading"
-      @click="sendMessage"
+      @click="saveQueryOnDatabase"
     >
       <svg
         class="h-5 transform origin-center text-gray-500 w-5 rotate-90"
