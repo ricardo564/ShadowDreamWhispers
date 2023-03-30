@@ -10,7 +10,7 @@ const handleWithGetListOfDatabase = () => {
 }
 
 const databaseList = await databaseStore.getDatabaseList
-
+console.table('databaseList: ', databaseList)
 const handleCreateDatabaseId = () => {
   return uuidv4()
 }
