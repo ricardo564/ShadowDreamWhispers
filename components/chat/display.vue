@@ -45,7 +45,9 @@ const handleWithChatStyle = (sentBy: string) => {
               </p>
               <span
                 class="block whitespace-pre-wrap"
-              >{{ response.message }}</span>
+              >
+                {{ response.message }}
+              </span>
             </div>
           </li>
         </ul>
