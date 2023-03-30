@@ -8,13 +8,14 @@ const { send } = useChatgpt()
 
 const databaseStore = useDatabaseStore()
 
-const handleCreateRandomId = () => {
+const handleCreateId = () => {
   return Number(databaseStore.getAllResponsesLength + 1)
 }
 
 const message = ref('')
 const loading = ref(false)
 const databaseId = databaseStore.getDatabaseId
+const userName = databaseStore.getUserName
 
 const sendMessage = async function () {
   loading.value = true
@@ -23,7 +24,8 @@ const sendMessage = async function () {
     const res = await send(message.value)
 
     const resWithId: Item = {
-      id: handleCreateRandomId(),
+      id: handleCreateId(),
+      sent_by: 'AI',
       message: res,
       created_at: new Date().toISOString(),
     }
@@ -45,7 +47,8 @@ const saveQueryOnDatabase = async function () {
   loading.value = true
 
   const query: Item = {
-    id: handleCreateRandomId(),
+    id: handleCreateId(),
+    sent_by: userName,
     message: message.value,
     created_at: new Date().toISOString(),
   }
