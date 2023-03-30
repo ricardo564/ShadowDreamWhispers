@@ -32,6 +32,9 @@ export const useDatabaseStore = defineStore({
     getUserId(): number {
       return this.user.id
     },
+    getUserName(): string {
+      return this.user.name
+    },
   },
   actions: {
     createNewDatabase(name: string): void {
