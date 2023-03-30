@@ -3,11 +3,11 @@ import { useDatabaseStore } from '~/stores/databaseStore'
 
 const databaseStore = useDatabaseStore()
 const databaseId = databaseStore.getDatabaseId
-const userId = databaseStore.getUserId
+const userName = databaseStore.getUserName
 await databaseStore.getAllData(databaseId)
 
-const handleWithChatStyle = (id: number) => {
-  if (id === userId) {
+const handleWithChatStyle = (sentBy: string) => {
+  if (sentBy === userName) {
     return 'flex justify-end'
   }
 
@@ -37,11 +37,11 @@ const handleWithChatStyle = (id: number) => {
             v-for="response in databaseStore.getAllResponses"
             class="flex h-auto"
             :key="response.id"
-            :class="handleWithChatStyle(response.created_at)"
+            :class="handleWithChatStyle(response.sent_by)"
           >
             <div class="rounded max-w-xl shadow shadow-gray-400 py-2 px-4 text-gray-700 relative">
               <p>
-                {{ response?.id }}
+                {{ response?.sent_by }}
               </p>
               <span class="block">{{ response.message }}</span>
             </div>
