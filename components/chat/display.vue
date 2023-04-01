@@ -20,9 +20,9 @@ const handleWithChatStyle = (sentBy: string) => {
     <div class="min-h-full w-full h-full grid">
       <div class="border-b flex border-gray-300 p-3 relative items-center rounded h-[5rem]">
         <img
-          class="rounded-full object-cover h-10 w-10"
-          src="https://cdn.pixabay.com/photo/2018/01/15/07/51/woman-3083383__340.jpg"
-          alt="username"
+          class="rounded-full object-cover h-15 w-15 border-2"
+          src="https://storage.googleapis.com/pai-images/84c288dea0cb45098622cb691d8e2e3b.png"
+          alt="roomImage"
         >
         <span class="font-bold ml-2 text-gray-600 block">
           {{ databaseId }}
@@ -39,7 +39,7 @@ const handleWithChatStyle = (sentBy: string) => {
             :key="response.id"
             :class="handleWithChatStyle(response.sent_by)"
           >
-            <div class="rounded max-w-xl shadow shadow-gray-400 py-2 px-4 text-gray-700 relative">
+            <div class="bg-white rounded-xl max-w-xl shadow shadow-gray-400 py-2 px-4 text-gray-700 relative">
               <p>
                 {{ response?.sent_by }}
               </p>
