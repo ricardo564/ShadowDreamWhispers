@@ -1,5 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+  css: ['boxicons/css/boxicons.min.css'],
   head: {
     title: 'ShadowDreamWhispers',
     meta: [
@@ -19,6 +20,7 @@ export default defineNuxtConfig({
     '@nuxt/image-edge',
     'nuxt-chatgpt',
     '@pinia/nuxt',
+    '@nuxt/ui',
   ],
   devtools: {
     enabled: true,
