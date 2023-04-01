@@ -78,7 +78,7 @@ const saveQueryOnDatabase = async function () {
       :disabled="loading"
       @click="saveQueryOnDatabase"
     >
-      <i class="bx bx-send bx-lg hover:text-red-800 animate-pop delay-50" />
+      <i class="bx bx-send bx-lg hover:text-red-800 animate-pop delay-50 text-shadow-lg" />
     </button>
   </div>
 </template>
