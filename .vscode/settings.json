@@ -1,14 +1,17 @@
 {
   "cSpell.words": [
+    "antfu",
     "attributify",
     "Axios",
     "boxicons",
     "chatgpt",
     "Nprogress",
+    "nuxi",
     "nuxt",
     "nuxtjs",
     "pinia",
     "Projeto",
+    "rushstack",
     "tailwindcss",
     "uuidv",
     "windi",
@@ -17,24 +20,4 @@
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true
   },
-  "editor.formatOnPaste": true,
-  "editor.formatOnSave": true,
-  "editor.defaultFormatter": "rome.rome",
-  "editor.identStyle": "space",
-  "editor.indentSize": 2,
-  "editor.tabSize": 2,
-  "rome_lsp.trace.server": "verbose",
-  "rome.lspBin": "",
-  "rome.indentStyle": "space",
-  "rome.indentSize": 2,
-  "rome.format.jsxMultiLine": false,
-  "rome.formatter.trailingComma": "all",
-  "html.format.wrapAttributes": "force-aligned",
-  "editor.bracketPairColorization.enabled": true,
-  "editor.wordWrap": "wordWrapColumn",
-  "[typescriptreact]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "editor.hover.enabled": true,
-  "editor.action.showHover": true,
 }
