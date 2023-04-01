@@ -11,7 +11,7 @@ export const useDatabaseStore = defineStore({
     databaseList: [] as string[],
     user: {
       id: 1,
-      name: 'UserName',
+      name: 'user',
     },
   }),
   getters: {
