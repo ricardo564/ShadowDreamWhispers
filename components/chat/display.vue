@@ -16,9 +16,9 @@ const handleWithChatStyle = (sentBy: string) => {
 </script>
 
 <template>
-  <div class="flex flex-col h-full w-full relative">
+  <div class="flex flex-col h-full w-full relative transition-all ease-in-out animate-fade-in-from-left delay-200">
     <div class="min-h-full w-full h-full grid">
-      <div class="border-b flex border-gray-300 p-3 relative items-center h-18">
+      <div class="border-b flex border-gray-300 p-3 relative items-center rounded h-[5rem]">
         <img
           class="rounded-full object-cover h-10 w-10"
           src="https://cdn.pixabay.com/photo/2018/01/15/07/51/woman-3083383__340.jpg"
